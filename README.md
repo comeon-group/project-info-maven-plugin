@@ -43,9 +43,10 @@ Or as part of normal package/verify/install.
 
 #### Configuration
 
-* `outputFile` sets the output JSON file.
-* `groupIdFilter` limits dependencies to groupIds starting with this value, usually used to only list internal dependencies.
+All configuration is optional.
 
+* `outputFile` sets the output JSON file. Defaults to `${project.build.directory/project-info.json}`
+* `groupIdFilter` limits dependencies to groupIds starting with this value, usually used to only list internal dependencies.
 
 ### Output
 
