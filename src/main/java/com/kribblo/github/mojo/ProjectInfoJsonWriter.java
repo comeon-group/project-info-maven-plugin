@@ -1,7 +1,7 @@
 package com.kribblo.github.mojo;
 
 import com.google.gson.*;
-import org.apache.maven.plugin.*;
+import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.*;
 

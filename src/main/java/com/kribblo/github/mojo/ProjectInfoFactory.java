@@ -1,9 +1,7 @@
 package com.kribblo.github.mojo;
 
-import com.google.common.base.*;
-import com.google.common.collect.*;
-import org.apache.maven.artifact.*;
-import org.apache.maven.project.*;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.project.MavenProject;
 
 import java.util.*;
 
@@ -25,7 +23,14 @@ public class ProjectInfoFactory {
 		projectInfo.version = mavenProject.getVersion();
 		projectInfo.description = mavenProject.getDescription();
 
-		Set<Artifact> dependencyArtifacts = getDependencyArtifacts(groupIdFilter);
+		projectInfo.dependencies = new HashSet<>();
+
+		if (groupIdFilter != null) {
+			projectInfo.groupIdFilter = groupIdFilter;
+			projectInfo.filteredDependencies = new HashSet<>();
+		}
+
+		Set<Artifact> dependencyArtifacts = mavenProject.getDependencyArtifacts();
 
 		for (Artifact dependencyArtifact : dependencyArtifacts) {
 			String scope = dependencyArtifact.getScope();
@@ -33,25 +38,13 @@ public class ProjectInfoFactory {
 			if (COMPILE_SCOPE.equals(scope)) {
 				String dependency = makeDependencyString(dependencyArtifact);
 				projectInfo.dependencies.add(dependency);
+				if (groupIdFilter != null && dependencyArtifact.getGroupId().startsWith(groupIdFilter)) {
+					projectInfo.filteredDependencies.add(dependency);
+				}
 			}
 		}
 
 		return projectInfo;
-	}
-
-	private Set<Artifact> getDependencyArtifacts(final String groupIdFilter) {
-		Set<Artifact> dependencyArtifacts = mavenProject.getDependencyArtifacts();
-
-		if(groupIdFilter != null) {
-			return Sets.filter(dependencyArtifacts, new Predicate<Artifact>() {
-				@Override
-				public boolean apply(Artifact artifact) {
-					return artifact.getGroupId().startsWith(groupIdFilter);
-				}
-			});
-		}
-
-		return dependencyArtifacts;
 	}
 
 	private String makeDependencyString(Artifact dependencyArtifact) {

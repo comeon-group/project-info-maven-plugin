@@ -1,20 +1,20 @@
 package com.kribblo.github.mojo;
 
 import org.apache.maven.plugin.*;
-import org.apache.maven.plugin.logging.*;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.*;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.project.*;
+import org.apache.maven.project.MavenProject;
 
-import java.io.*;
+import java.io.File;
 
 @Mojo(name = "project-info", defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class ProjectInfoJsonMojo extends AbstractMojo {
 
-	@Parameter(defaultValue = "${project}", readonly = true, required = true)
+	@Parameter(defaultValue = "${project}", readonly = true)
 	private MavenProject mavenProject;
 
-	@Parameter(defaultValue = "${project.build.directory/project-info.json}", required = true)
+	@Parameter(defaultValue = "${project.build.directory/project-info.json}")
 	private File outputFile;
 
 	@Parameter(required = false)
