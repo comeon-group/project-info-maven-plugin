@@ -1,4 +1,4 @@
-# project-info-json-mojo - Maven Mojo for generating dependency info into a JSON file
+# project-info-maven-plugin
 
 Light-weight project information extractor, for reporting optionally filtered dependencies and some other things on a project. Useful for collecting version information and who depends on who in an environment with multiple servers, perhaps many many small services.
 
