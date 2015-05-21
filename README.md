@@ -36,7 +36,7 @@ Default phase is `generate-resources`.
                 <goal>project-info</goal>
             </goals>
             <configuration>
-                <outputFile>${basedir}/info.json</outputFile>
+                <outputFile>${project.basedir}/project-info.json</outputFile>
                 <groupIdFilter>com.comeon</groupIdFilter>
             </configuration>
         </execution>

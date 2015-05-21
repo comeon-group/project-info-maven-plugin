@@ -165,7 +165,7 @@
 							<goal>project-info</goal>
 						</goals>
 						<configuration>
-							<outputFile>${project.build.directory}/project-info.json</outputFile>
+							<outputFile>${project.basedir}/project-info.json</outputFile>
 							<groupIdFilter>com.google</groupIdFilter>
 						</configuration>
 					</execution>
